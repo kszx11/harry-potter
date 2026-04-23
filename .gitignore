@@ -1,0 +1,7 @@
+autosave.json
+savegame.json
+.idea/
+*.iml
+__pycache__/
+*.pyc
+*.egg-info/

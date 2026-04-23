@@ -1,0 +1,7 @@
+TITLE = "bold yellow"
+NARRATION = "white"
+NPC = "bold cyan"
+SYSTEM = "bold bright_yellow"
+ERROR = "bold red"
+META = "italic bright_black"
+ACCENT = "bright_black"

@@ -1,0 +1,85 @@
+{
+  "rumors": [
+    {
+      "id": "castle_whispers",
+      "text": "Students say one of the staircases has started settling at a different landing after curfew.",
+      "source": "House whisper",
+      "location_id": "hogwarts_entrance_hall",
+      "topic": "secrets",
+      "leads_to": "library",
+      "person_hint": "Argus Filch"
+    },
+    {
+      "id": "great_hall_notice",
+      "text": "Someone at the staff table keeps receiving notes by owl and burning them unopened.",
+      "source": "Breakfast gossip",
+      "location_id": "great_hall",
+      "topic": "castle",
+      "leads_to": "defense_corridor",
+      "person_hint": "Nearly Headless Nick"
+    },
+    {
+      "id": "library_restriction",
+      "text": "A book from the restricted shelves has been put back in the wrong place twice this week, which Madam Pince swears is never an accident.",
+      "source": "Quiet scholar",
+      "location_id": "library",
+      "topic": "classes",
+      "leads_to": "dungeons_corridor",
+      "person_hint": "Madam Pince"
+    },
+    {
+      "id": "dungeon_shortage",
+      "text": "The dungeons are missing ingredients that are too ordinary to steal for glamour and too specific to miscount by chance.",
+      "source": "Lab partner complaint",
+      "location_id": "dungeons_corridor",
+      "topic": "classes",
+      "leads_to": "diagon_alley",
+      "person_hint": "Professor Snape"
+    },
+    {
+      "id": "defense_cabinet",
+      "text": "A cabinet in the Defense corridor has started rattling only after the last lesson ends.",
+      "source": "Third-year student",
+      "location_id": "defense_corridor",
+      "topic": "classes",
+      "leads_to": "forbidden_forest_edge",
+      "person_hint": "Remus Lupin"
+    },
+    {
+      "id": "grounds_detention",
+      "text": "Someone has been meeting Hagrid after dark and leaving with muddy shoes and no explanation.",
+      "source": "Grounds rumor",
+      "location_id": "hogwarts_grounds",
+      "topic": "forest",
+      "leads_to": "hagrids_hut",
+      "person_hint": "Rubeus Hagrid"
+    },
+    {
+      "id": "forest_warning",
+      "text": "The centaurs have noticed strange lantern light moving between the trees where no school path ought to be.",
+      "source": "Whispered warning",
+      "location_id": "forbidden_forest_edge",
+      "topic": "forest",
+      "leads_to": "forbidden_forest_edge",
+      "person_hint": "Firenze"
+    },
+    {
+      "id": "hogsmeade_whisper",
+      "text": "Rosmerta has heard of a student asking after a hidden route into the village that bypasses the usual checks.",
+      "source": "Inn conversation",
+      "location_id": "hogsmeade_high_street",
+      "topic": "hogsmeade",
+      "leads_to": "hogwarts_grounds",
+      "person_hint": "Madam Rosmerta"
+    },
+    {
+      "id": "diagon_ministry_note",
+      "text": "A Diagon Alley bookseller says Ministry buyers have been asking after school maps and old castle surveys.",
+      "source": "Shop talk",
+      "location_id": "diagon_alley",
+      "topic": "ministry",
+      "leads_to": "hogwarts_entrance_hall",
+      "person_hint": "Celandine Warbeck"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "shops": [
+    {
+      "id": "three_broomsticks",
+      "name": "The Three Broomsticks",
+      "owner": "Madam Rosmerta",
+      "location_id": "hogsmeade_high_street",
+      "area_id": "hogsmeade_three_broomsticks_front",
+      "interior_area_id": "three_broomsticks_common_room",
+      "flavor": "Warmth and conversation arrive together here, though neither is ever quite as casual as it first appears.",
+      "goods": ["butterbeer", "tea", "steaming lunches"]
+    },
+    {
+      "id": "honeydukes",
+      "name": "Honeydukes",
+      "owner": "Ambrose Flume",
+      "location_id": "hogsmeade_high_street",
+      "area_id": "hogsmeade_honeydukes_counter",
+      "interior_area_id": "honeydukes_back_room",
+      "flavor": "Every shelf suggests delight, mischief, or the possibility that those two things are not so different.",
+      "goods": ["Chocolate Frogs", "Fizzing Whizzbees", "Acid Pops"]
+    },
+    {
+      "id": "flourish_and_blotts",
+      "name": "Flourish and Blotts",
+      "owner": "Celandine Warbeck",
+      "location_id": "diagon_alley",
+      "area_id": "diagon_flourish_frontage",
+      "interior_area_id": "flourish_and_blotts_interior",
+      "flavor": "Recommended reading and private curiosity mix freely in the aisles.",
+      "goods": ["school texts", "spellbooks", "wizarding histories"]
+    },
+    {
+      "id": "slug_and_jiggers",
+      "name": "Slug and Jiggers Apothecary",
+      "owner": "Tiberius Pepperell",
+      "location_id": "diagon_alley",
+      "area_id": "diagon_apothecary_row",
+      "interior_area_id": "slug_and_jiggers_interior",
+      "flavor": "The shop has the severe tidiness of a place where one wrong bottle ruins an afternoon.",
+      "goods": ["powdered root", "dried herbs", "vials and scales"]
+    },
+    {
+      "id": "eeylops_owl_emporium",
+      "name": "Eeylops Owl Emporium",
+      "owner": "Miriam Eeylops",
+      "location_id": "diagon_alley",
+      "area_id": "diagon_owl_emporium_front",
+      "interior_area_id": "eeylops_owl_emporium_interior",
+      "flavor": "The owls watch customers with the gravity of creatures who know letters can change lives.",
+      "goods": ["school owls", "perches", "owl treats"]
+    }
+  ]
+}

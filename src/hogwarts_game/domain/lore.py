@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from difflib import SequenceMatcher
 import json
 from pathlib import Path
 
@@ -102,13 +103,34 @@ class LoreCatalog:
         area_id: str | None = None,
     ) -> NpcState | None:
         needle = query.strip().lower()
+        if not needle:
+            return None
+        candidates: list[NpcState] = []
         for npc in npc_states.values():
             if location_id and npc.current_location != location_id:
                 continue
             if area_id is not None and npc.current_area != area_id:
                 continue
+            candidates.append(npc)
             if needle == npc.name.lower() or needle in npc.name.lower():
                 return npc
+
+        for npc in candidates:
+            parts = [part.lower() for part in npc.name.split()]
+            if any(part.startswith(needle) or needle.startswith(part) for part in parts):
+                return npc
+
+        scored: list[tuple[float, NpcState]] = []
+        for npc in candidates:
+            parts = [part.lower() for part in npc.name.split()]
+            ratios = [SequenceMatcher(None, needle, npc.name.lower()).ratio()]
+            ratios.extend(SequenceMatcher(None, needle, part).ratio() for part in parts)
+            score = max(ratios)
+            if score >= 0.72:
+                scored.append((score, npc))
+        if scored:
+            scored.sort(key=lambda item: item[0], reverse=True)
+            return scored[0][1]
         return None
 
 

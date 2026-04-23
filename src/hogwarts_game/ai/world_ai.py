@@ -95,12 +95,12 @@ class WorldAI:
             return text
         tone = choice(
             [
-                "glances past you before answering, as if portraits might be listening",
-                "lowers their voice in the practiced way of someone used to castle gossip",
-                "answers with the caution of a person who knows Hogwarts keeps more than one kind of memory",
+                "Glances past you before answering, as if portraits might be listening",
+                "Lowers their voice in the practiced way of someone used to castle gossip",
+                "Answers with the caution of a person who knows Hogwarts keeps more than one kind of memory",
             ]
         )
-        return f"{npc.name} {tone}. \"{self._fallback_speech(npc, player_line)}\""
+        return f"{tone}. \"{self._fallback_speech(npc, player_line)}\""
 
     def narrate_action(self, location: LocationProfile, action_text: str) -> str:
         instructions = (

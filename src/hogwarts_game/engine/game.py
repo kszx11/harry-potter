@@ -501,6 +501,7 @@ class GameApp:
             self.renderer.error("Go where inside this place?")
             return
         location = self.current_location()
+        all_locations = self.all_locations()
         current_area = self.current_area()
         if current_area is None:
             allowed = {area.id for area in self.areas_for_location(location.id)}
@@ -508,7 +509,14 @@ class GameApp:
             allowed = set(current_area.linked_areas)
         area = self.lore.find_area(target, self.all_areas(), location.id, allowed)
         if area is None:
-            self.renderer.error("No such internal route is open from here.")
+            target_location = self.lore.find_location(
+                target,
+                {loc_id: all_locations[loc_id] for loc_id in location.linked_locations if loc_id in all_locations},
+            )
+            if target_location is not None:
+                self._arrive(target_location, traveled=False)
+                return
+            self.renderer.error("No such nearby route is open from here.")
             return
         self.state.area_id = area.id
         self.state.discovered_areas = list(dict.fromkeys(self.state.discovered_areas + [area.id]))
@@ -629,7 +637,7 @@ class GameApp:
                 self._commit_npc_states(npc_states)
                 save_state(self.config.autosave_file, self.state)
                 return
-            reply = self.ai.npc_reply(npc, self.current_location(), line)
+            reply = self._normalize_npc_reply(npc.name, self.ai.npc_reply(npc, self.current_location(), line))
             npc.memory.append({"speaker": speaker, "text": line})
             npc.memory.append({"speaker": npc.name, "text": reply})
             npc.memory = npc.memory[-12:]
@@ -655,7 +663,10 @@ class GameApp:
         if npc is None:
             self.renderer.error("That person is not here.")
             return
-        reply = self.ai.npc_reply(npc, self.current_location(), f"Tell me about {topic}.")
+        reply = self._normalize_npc_reply(
+            npc.name,
+            self.ai.npc_reply(npc, self.current_location(), f"Tell me about {topic}."),
+        )
         npc.memory.append({"speaker": self.state.player_name.split()[0], "text": f"Asked about {topic}"})
         npc.memory.append({"speaker": npc.name, "text": reply})
         if topic.lower() in {"hogwarts", "forest", "hogsmeade", "classes", "library", "secret passages", "diagon alley"}:
@@ -907,13 +918,7 @@ class GameApp:
         if local_mission is not None:
             suggestions.append(f"A pressure point: {local_mission.title} can be advanced here.")
 
-        talkable = next(
-            (
-                npc for npc in present_npcs
-                if npc.troubles or npc.rumor_ids or not npc.memory
-            ),
-            None,
-        )
+        talkable = self._first_talkable_npc(present_npcs)
         if talkable is not None:
             focus = talkable.troubles[0] if talkable.troubles else "what weighs on this place"
             focus_text = focus.rstrip(".")
@@ -995,6 +1000,26 @@ class GameApp:
         if area is not None:
             return area.name
         return self.current_location().name
+
+    @staticmethod
+    def _first_talkable_npc(present_npcs: list[NpcState]) -> NpcState | None:
+        return next((npc for npc in present_npcs if not npc.memory), None)
+
+    @staticmethod
+    def _normalize_npc_reply(npc_name: str, reply: str) -> str:
+        cleaned = reply.strip()
+        lowered = cleaned.lower()
+        name_lower = npc_name.lower()
+        for prefix in (
+            f"{name_lower}:",
+            f"{name_lower} says:",
+            f"{name_lower} said:",
+            f"{name_lower},",
+            f"{name_lower} ",
+        ):
+            if lowered.startswith(prefix):
+                return cleaned[len(prefix):].strip()
+        return cleaned
 
 
 def _slug(text: str) -> str:
